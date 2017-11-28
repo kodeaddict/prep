@@ -10,7 +10,7 @@ def listToInt(item):
 
 hashlib = ctypes.CDLL('/home/akhil/code/gandhana/libtarget.so')
 cookie = hashlib.hash_init( 10, 0, 0, 0 );
-test = ctypes.CDLL('/home/akhil/code/gandhana/libtest.so')
+test = ctypes.CDLL('/home/akhil/code/gandhana/libakhil.so')
 num = [1,2,3,4]
 ret = test.check_duplicate_numbers( cookie, listToInt(num), len(num) )
 
