@@ -8,10 +8,14 @@ def listToInt(item):
    arr = (ctypes.c_int * len(item))(*item)
    return arr
 
-hashlib = ctypes.CDLL('/home/akhil/code/gandhana/libtarget.so')
+hashlib = ctypes.CDLL('/home/akhil/code/prep/libtarget.so')
 cookie = hashlib.hash_init( 10, 0, 0, 0 );
-test = ctypes.CDLL('/home/akhil/code/gandhana/libakhil.so')
-num = [1,2,3,4]
-ret = test.check_duplicate_numbers( cookie, listToInt(num), len(num) )
+test = ctypes.CDLL('/home/akhil/code/prep/libakhil.so')
 
-print "Duplicate items present? %s" %( "YES" if ret else "NO")
+num = [1,2,3,4]
+dupFound = test.check_duplicate_numbers( cookie, listToInt(num), len(num) )
+
+# TODO add library for asserting and debugging
+assert dupFound == False
+
+print "Duplicate items present? %s" %( "YES" if dupFound else "NO")

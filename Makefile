@@ -1,3 +1,5 @@
+# Ex: make SRC=src-akhil
+
 ifndef SRC
 SRC := src
 endif
