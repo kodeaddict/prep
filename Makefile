@@ -3,11 +3,14 @@
 ifndef SRC
 SRC := src
 endif
+ifndef TEST_DIR
+TEST_DIR := ctypes
+endif
 
-TEST_DIR := unittest
+#TEST_DIR := unittest
 
 TARGET_LIB := libtarget.so
-UT_BIN := ut_bin
+#UT_BIN := ut_bin
 
 SRCS := $(wildcard $(SRC)/*.c)
 OBJS := $(SRCS:%.c=%.o)
@@ -26,18 +29,18 @@ all: $(TARGET_LIB)
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(TARGET_LIB): $(OBJS)
+$(TARGET_LIB): $(OBJS) $(TEST_OBJS)
 	$(CC) $(LIB_CFLAGS) -o $@ $^ 
 
 $(TEST_OBJ)/%.o: $(TEST_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-unittest: $(UT_BIN)
-	@echo "Runnning unit test"
-	@./$(UT_BIN)
-
-$(UT_BIN): $(TARGET_LIB) $(TEST_OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+#unittest: $(UT_BIN)
+#	@echo "Runnning unit test"
+#	@./$(UT_BIN)
+#
+#$(UT_BIN): $(TARGET_LIB) $(TEST_OBJS)
+#	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
 	@rm -f $(TARGET_LIB) $(UT_BIN) $(TEST_OBJS) $(OBJS)
