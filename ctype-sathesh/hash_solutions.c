@@ -1,12 +1,14 @@
 
 #include "../include/hash.h"
 #include <stdint.h>
+#include <stdio.h>
 
 
 bucket_t hash_fn(voidp key, bucket_t max_bkt)
 {
-    return (long*) key / max_bkt;
+    return (bucket_t) ((unsigned long)key / max_bkt);
 }
+
 int compare_fn(voidp key, voidp comparewith)
 {
     long *p1 = key, *p2 = comparewith;
@@ -34,7 +36,7 @@ int
 check_duplicate_numbers(int *num, int len)
 {
       int i;
-      hashCookie cookie = hash_init(10, hash_fn. cmp_fn, NULL);
+      hashCookie cookie = hash_init(10, hash_fn, compare_fn, NULL);
 
       for (i=0; i < len; i++) {
          if(hash_lookup(cookie, (voidp) (intptr_t) num[i])) {

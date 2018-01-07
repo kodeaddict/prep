@@ -29,8 +29,13 @@ cmp_fn = CMPFUNC(cmp_fn_py)
 
 target = CDLL('../libtarget.so')
 
-num = [1,2,3,4]
-dupFound = target.check_duplicate_numbers(listToInt(num), len(num) )
+#num = [1,2,3,4]
+#dupFound = target.check_duplicate_numbers(listToInt(num), len(num) )
+
+num =  "hello word sathesh    "
+print num
+dupFound = target.urlify(num, len(num) )
+print num
 
 # TODO add library for asserting and debugging
 assert dupFound == False
