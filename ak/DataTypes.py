@@ -8,24 +8,7 @@ class TreeNode(object):
       self.left = None
       self.right = None
 
-def oldconstructTree( data ):
-   #data = [3,5,2,1,4,6,7,8,9,10,11,12,13,14]
-   n = iter(data)
-   tree = TreeNode(next(n))
-   fringe = deque([tree])
-   while True:
-      head = fringe.popleft()
-      try:
-         nxt = next(n)
-         head.left = None if nxt == "null" else TreeNode(next(n))
-         fringe.append(head.left)
-         nxt = next(n)
-         head.right = None if nxt == "null" else TreeNode(next(n))
-         fringe.append(head.right)
-      except StopIteration:
-         break
-   return tree
-
+# data is read as level order list. "null" indicates no child
 def constructTree( data ):
    assert data[0] != "null"
    root = None
@@ -54,14 +37,14 @@ def constructTree( data ):
       pnode.right = rnode
    return root
 
-# print BreadthFirst
+# print BreadthFirst (level order)
 def printTreeAsList( root ):
-   stack = [root]
+   queue = deque() # FIFO
+   queue.append( root )
    nodes = []
    index = 0
-   while stack:
-      cur_node = stack[0]
-      stack = stack[1:]
+   while queue:
+      cur_node = queue.popleft()
       index += 1
       if cur_node == "null":
          nodes.append( cur_node )
@@ -70,9 +53,9 @@ def printTreeAsList( root ):
          lastNonNullIndex = index
          # left node
          item = "null" if cur_node.left == None else cur_node.left
-         stack.append( item )
+         queue.append( item )
          # right node
          item = "null" if cur_node.right == None else cur_node.right
-         stack.append( item )
+         queue.append( item )
 
    return nodes[:lastNonNullIndex]

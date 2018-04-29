@@ -5,21 +5,21 @@ import DataTypes
 
 traceFunctions = set()
 
-def getArguments( frame ):
-   args = inspect.getargvalues( frame )
-   passed = []
-   for arg in args.args:
-      if arg == 'self':
-         passed.append( 'self' )
-         continue
-      val = args.locals[ arg ]
-      if isinstance( val, DataTypes.TreeNode ):
-         passed.append( arg + ":" + str( val.val ) )
-      else:
-         passed.append( arg + ":" + str( val ) )
-   return passed
-
 def tracefunc(frame, event, arg, indent=[0]):
+   def getArguments( fr ):
+      args = inspect.getargvalues( fr )
+      passed = []
+      for arg in args.args:
+         if arg == 'self':
+            passed.append( 'self' )
+            continue
+         val = args.locals[ arg ]
+         if isinstance( val, DataTypes.TreeNode ):
+            passed.append( arg + ":" + str( val.val ) )
+         else:
+            passed.append( arg + ":" + str( val ) )
+      return passed
+
    if 'None' in traceFunctions or frame.f_code.co_name in traceFunctions:
       if event == "call":
          args = getArguments( frame )
