@@ -36,7 +36,7 @@ r2 = constructTree( data )
 l = DataTypes.printTreeAsList( r1 )
 print l, l == data
 
-#Util.startFuncTracing( "isSameTree" )
+Util.startFuncTracing( "isSameTree" )
 same = SameTreeSolution().isSameTree( r1, r2 )
-#Util.stopFuncTracing( " isSameTree" )
+Util.stopFuncTracing( " isSameTree" )
 print "%s" % ( "same" if same else "not same" )
