@@ -30,13 +30,13 @@ class SameTreeSolution(object):
       print r1val, r2val
       return r1val == r2val
 
-data = [3,5, "null", 2,1,4,6,7,8,9,10,11,12,13,14]
-r1 = constructTree( data )
-r2 = constructTree( data )
+inputTree = [3,5, "null", 2,1,4,6,7,8,9,10,11,12,13,14]
+r1 = constructTree( inputTree )
+r2 = constructTree( inputTree )
 l = DataTypes.printTreeAsList( r1 )
-print l, l == data
+print l, l == inputTree
 
-Util.startFuncTracing( "isSameTree" )
+#Util.startFuncTracing( "isSameTree" )
 same = SameTreeSolution().isSameTree( r1, r2 )
-Util.stopFuncTracing( " isSameTree" )
+#Util.stopFuncTracing( "isSameTree" )
 print "%s" % ( "same" if same else "not same" )
